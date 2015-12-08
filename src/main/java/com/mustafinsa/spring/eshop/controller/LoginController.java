@@ -10,4 +10,14 @@ public class LoginController {
     public String login() {
         return "login";
     }
+
+    @RequestMapping
+    public String logout() {
+        return "logout";
+    }
+
+    @RequestMapping("/admin")
+    public String admin() {
+        return "adminPage";
+    }
 }
