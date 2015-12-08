@@ -27,8 +27,10 @@
         <authentication-provider>
             <jdbc-user-service
                     data-source-ref="dataSourceUser"
-                    users-by-username-query="SELECT username, password, enabled FROM users WHERE username=?"
-                    authorities-by-username-query="SELECT username, authority FROM authorities WHERE username=?"/>
+                    users-by-username-query=
+                            "SELECT username, password, enabled FROM users WHERE BINARY username=?"
+                    authorities-by-username-query=
+                            "SELECT username, authority FROM authorities WHERE BINARY username=?"/>
         </authentication-provider>
     </authentication-manager>
 
