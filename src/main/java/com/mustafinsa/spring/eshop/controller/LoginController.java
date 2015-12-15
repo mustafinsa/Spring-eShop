@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
@@ -29,7 +30,13 @@ public class LoginController {
     }
 
     @RequestMapping("/newAccount")
-    public String newAccount(Model model, @Valid User user, BindingResult bindingResult) {
+    public String showNewAccount(Model model) {
+        model.addAttribute("user", new User());
+        return "newAccount";
+    }
+
+    @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
+    public String createAccount(Model model, @Valid User user, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             if (usersDao.exists(user.getUsername())) {
@@ -37,6 +44,7 @@ public class LoginController {
             }
             return "newAccount";
         }
+
         user.setEnabled(true);
         user.setAuthority("ROLE_USER");
         usersDao.create(user);

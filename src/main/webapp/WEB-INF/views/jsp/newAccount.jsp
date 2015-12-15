@@ -43,7 +43,7 @@
 
 </head>
 <body>
-<%--<div class="header">
+<div class="header">
     <a class="title" href="${pageContext.request.contextPath}/">eShop catalog</a>
 
     <sec:authorize access="!isAuthenticated()">
@@ -56,7 +56,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
     </sec:authorize>
-</div>--%>
+</div>
 <table class="formTable">
     <sf:form id="details" action="${pageContext.request.contextPath}/createAccount" method="POST" commandName="user">
         <tr>
