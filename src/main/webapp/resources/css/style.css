@@ -6,6 +6,7 @@ div.header {
     background-color: #aab9b3;
 }
 div.content {
+    align-items: center;
     position: inherit;
     padding: 40px;
 }

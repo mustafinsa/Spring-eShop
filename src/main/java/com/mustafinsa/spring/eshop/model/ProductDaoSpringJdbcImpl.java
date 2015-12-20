@@ -20,7 +20,6 @@ public class ProductDaoSpringJdbcImpl implements ProductDao {
     public static final String SELECT_ALL_QUERY = "SELECT id, name, price, quantity FROM Products";
 
     @Autowired
-    @Qualifier("dataSourceShop")
     public void setJdbcTemplate(DataSource dataSource) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }

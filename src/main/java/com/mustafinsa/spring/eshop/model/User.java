@@ -1,26 +1,34 @@
 package com.mustafinsa.spring.eshop.model;
 
 import org.hibernate.validator.constraints.NotBlank;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "Users")
+@SecondaryTable(name = "Authorities", pkJoinColumns = {@PrimaryKeyJoinColumn(name = "username")})
 public class User {
 
-    @NotBlank
-    @Size(min=6, max=15)
-    @Pattern(regexp = "^[^\\s]*$")
+    @NotBlank(groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+    @Size(min = 6, max = 15, groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+    @Pattern(regexp = "^[^\\s]*$", groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+    @Id
+    @Column(name = "username")
     private String username;
 
-    @NotNull
-    @Pattern(regexp = "[^ ]*@[^ ]*\\.*")
+    @NotNull(groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+    @Pattern(regexp = "[^ ]*@[^ ]*\\.*", groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
     private String email;
 
-    @NotBlank
-    @Pattern(regexp = "^\\S+$")
-    @Size(min=8, max = 15)
+    @NotBlank(groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+    @Pattern(regexp = "^\\S+$", groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+    @Size(min = 8, max = 15, groups = {FormValidationGroup.class})
     private String password;
     private boolean enabled = false;
+
+    @Column(name = "authority", table = "Authorities")
     private String authority;
     private String name;
 

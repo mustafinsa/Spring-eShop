@@ -15,7 +15,7 @@
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/logout" access="permitAll"/>
         <intercept-url pattern="/newAccount" access="permitAll"/>
-        <intercept-url pattern="/createdAccount" access="permitAll"/>
+        <intercept-url pattern="/createAccount" access="permitAll"/>
         <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="denyAll"/>
         <form-login
@@ -28,7 +28,7 @@
     <authentication-manager>
         <authentication-provider>
             <jdbc-user-service
-                    data-source-ref="dataSourceUser"
+                    data-source-ref="dataSource"
                     users-by-username-query=
                             "SELECT username, password, enabled FROM Users WHERE BINARY username=?"
                     authorities-by-username-query=
