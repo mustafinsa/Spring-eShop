@@ -14,7 +14,7 @@ import java.util.List;
 
 @Transactional
 //@Component
-public class UsersDaoImpl implements UsersDao {
+public class UsersDaoSpring implements UsersDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Autowired
     private PasswordEncoder passwordEncoder;

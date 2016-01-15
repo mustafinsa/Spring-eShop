@@ -1,19 +1,14 @@
-package com.mustafinsa.spring.test;
+package com.mustafinsa.spring.eshop.model;
 
-import com.mustafinsa.spring.eshop.model.User;
-import com.mustafinsa.spring.eshop.model.UsersDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import javax.sql.DataSource;
-
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

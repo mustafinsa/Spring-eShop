@@ -1,6 +1,15 @@
 package com.mustafinsa.spring.eshop.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Products")
 public class Product {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private int price;
@@ -62,5 +71,26 @@ public class Product {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (price != product.price) return false;
+        if (quantity != product.quantity) return false;
+        return !(name != null ? !name.equals(product.name) : product.name != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + price;
+        result = 31 * result + quantity;
+        return result;
     }
 }

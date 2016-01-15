@@ -4,13 +4,11 @@ import java.util.List;
 
 public interface ProductDao {
 
-    void save(Product product);
+    void saveOrUpdate(Product product);
 
-    Product getById(int id);
+    Product getProduct(int id);
 
-    void update(Product product);
+    List<Product> getProducts();
 
-    void deleteById(int id);
-
-    List<Product> getAll();
+    boolean delete(int id);
 }

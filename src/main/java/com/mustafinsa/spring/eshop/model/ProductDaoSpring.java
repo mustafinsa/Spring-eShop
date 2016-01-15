@@ -1,19 +1,17 @@
 package com.mustafinsa.spring.eshop.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Component
-public class ProductDaoSpringJdbcImpl implements ProductDao {
+//@Component
+public class ProductDaoSpring implements ProductDao {
 
     private NamedParameterJdbcTemplate jdbcTemplate;
     public static final String SELECT_BY_ID_QUERY = "SELECT id, name, price, quantity FROM Products WHERE id = :id";
@@ -25,7 +23,7 @@ public class ProductDaoSpringJdbcImpl implements ProductDao {
     }
 
     @Override
-    public Product getById(int id) {
+    public Product getProduct(int id) {
         MapSqlParameterSource params = new MapSqlParameterSource("id", id);
         return jdbcTemplate.queryForObject(SELECT_BY_ID_QUERY, params, new RowMapper<Product>(){
             @Override
@@ -41,7 +39,7 @@ public class ProductDaoSpringJdbcImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<Product> getProducts() {
         return jdbcTemplate.query(SELECT_ALL_QUERY, new RowMapper<Product>(){
             @Override
             public Product mapRow(ResultSet rs, int i) throws SQLException {
@@ -56,17 +54,13 @@ public class ProductDaoSpringJdbcImpl implements ProductDao {
     }
 
     @Override
-    public void save(Product product) {
+    public void saveOrUpdate(Product product) {
         //TODO
     }
 
     @Override
-    public void update(Product product) {
+    public boolean delete(int id) {
         //TODO
-    }
-
-    @Override
-    public void deleteById(int id) {
-        //TODO
+        return false;
     }
 }

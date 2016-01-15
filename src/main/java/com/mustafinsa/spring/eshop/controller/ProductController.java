@@ -19,13 +19,13 @@ public class ProductController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String productAll(Model model){
-        model.addAttribute("productList", productDao.getAll());
+        model.addAttribute("productList", productDao.getProducts());
         return "productAll";
     }
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String product(@RequestParam("id") int id, Model model) {
-        model.addAttribute("product", productDao.getById(id));
+        model.addAttribute("product", productDao.getProduct(id));
         return "product";
     }
 }
