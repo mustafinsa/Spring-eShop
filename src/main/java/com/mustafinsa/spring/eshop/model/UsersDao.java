@@ -9,4 +9,6 @@ public interface UsersDao {
     List<User> getAllUsers();
 
     boolean exists(String username);
+
+    User getUser(String username);
 }

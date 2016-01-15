@@ -20,7 +20,6 @@ public class UsersService {
         return usersDao.exists(username);
     }
 
-//    @Secured("ROLE_ADMIN")
     public List<User> getAllUsers() {
         return usersDao.getAllUsers();
     }

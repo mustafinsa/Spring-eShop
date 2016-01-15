@@ -50,4 +50,9 @@ public class UsersDaoImpl implements UsersDao {
         return jdbcTemplate.queryForObject(
                 "select count(*) from Users where username=:username", new MapSqlParameterSource("username", username), Integer.class) > 0;
     }
+
+    @Override
+    public User getUser(String username) {
+        return null;
+    }
 }

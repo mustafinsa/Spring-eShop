@@ -30,13 +30,12 @@ public class UserDaoTest {
 
     @Autowired
     private UsersDao usersDao;
-
     @Autowired
     private DataSource dataSource;
 
-    private User user1 = new User("Username1", "admin1@mail.ru", "12345678", true, "ROLE_USER", "user");
-    private User user2 = new User("Username2", "admin2@mail.ru", "12345678", true, "ROLE_USER", "user");
-    private User user3 = new User("Username3", "admin3@mail.ru", "123 78", true, "ROLE_USER", "user");
+    private User user1 = new User("Salavat1", "admin1@mail.ru", "12345678", true, "ROLE_USER", "user");
+    private User user2 = new User("Salavat2", "admin2@mail.ru", "12345678", true, "ROLE_USER", "user");
+    private User user3 = new User("Salavat3", "admin3@mail.ru", "123 78", true, "ROLE_USER", "user");
 
     @Before
     public void init() {
@@ -47,7 +46,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void testCreateRetrieve() {
+    public void testCreateRetrive() {
         usersDao.create(user1);
 
         List<User> userList1 = usersDao.getAllUsers();
@@ -67,7 +66,7 @@ public class UserDaoTest {
 
     @Test
     public void testCreateUser() {
-        User user = new User("Username1", "admin@mail.ru", "12345678", true, "ROLE_USER", "user");
+        User user = new User("Salavat1", "admin@mail.ru", "12345678", true, "ROLE_USER", "user");
         usersDao.create(user);
 
         List<User> userList = usersDao.getAllUsers();

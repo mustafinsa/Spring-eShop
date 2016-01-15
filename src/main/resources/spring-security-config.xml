@@ -10,6 +10,7 @@
 
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/" access="permitAll" />
+        <intercept-url pattern="/error" access="permitAll" />
         <intercept-url pattern="/product" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll"/>
         <intercept-url pattern="/login" access="permitAll"/>
@@ -23,11 +24,13 @@
                 default-target-url="/"
                 authentication-failure-url="/login?error=true"/>
         <logout logout-success-url="/logout"/>
+        <remember-me key="appKey" user-service-ref="jdbcUserDetailsManager"/>
     </http>
 
     <authentication-manager>
         <authentication-provider>
             <jdbc-user-service
+                    id="jdbcUserDetailsManager"
                     data-source-ref="dataSource"
                     users-by-username-query=
                             "SELECT username, password, enabled FROM Users WHERE BINARY username=?"

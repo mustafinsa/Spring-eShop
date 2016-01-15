@@ -26,7 +26,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping("/loggedOut")
+    @RequestMapping("/logout")
     public String logout() {
         return "logout";
     }
