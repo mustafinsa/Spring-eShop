@@ -24,13 +24,15 @@ public class ShoppingCartController {
     @RequestMapping(value="postCart", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody Map<String, Object> getCartItem(Principal principal, @RequestBody Map<String, Object> data) {
 
-        int id = Integer.parseInt((String) data.get("target"));
-        shoppingCartDao.saveOrUpdate(new ShoppingCart(id, usersDao.getUser(principal.getName()), 1, false));
-        if (!shoppingCartDao.currentCartExist(principal.getName())) {
-            System.out.println(id + " not exists");
+        int itemId = Integer.parseInt((String) data.get("target"));
+        if (shoppingCartDao.currentCartExist(principal.getName(), itemId)) {
+            System.out.println(itemId + " exists");
+            ShoppingCart updatedCart = shoppingCartDao.getCart(principal.getName(), itemId);
+            updatedCart.setItemQuantity(updatedCart.getItemQuantity() + 1);
+            shoppingCartDao.saveOrUpdate(updatedCart);
         } else {
-
-            System.out.println(id + " exist");
+            System.out.println(itemId + " not exists");
+            shoppingCartDao.saveOrUpdate(new ShoppingCart(itemId, usersDao.getUser(principal.getName()), 1, false));
         }
 
         Map<String, Object> rval = new HashMap<>();
