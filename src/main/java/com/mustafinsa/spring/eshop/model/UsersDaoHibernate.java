@@ -17,7 +17,6 @@ public class UsersDaoHibernate implements UsersDao {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -31,18 +30,18 @@ public class UsersDaoHibernate implements UsersDao {
         session().save(user);
     }
 
+    @Override
+    public User getUser(String username) {
+        Criteria crit = session().createCriteria(User.class);
+        crit.add(Restrictions.idEq(username));
+        return (User) crit.uniqueResult();
+    }
+
     public List<User> getAllUsers() {
         return session().createQuery("FROM User").list();
     }
 
     public boolean exists(String username) {
         return getUser(username) != null;
-    }
-
-    @Override
-    public User getUser(String username) {
-        Criteria crit = session().createCriteria(User.class);
-        crit.add(Restrictions.idEq(username));
-        return  (User) crit.uniqueResult();
     }
 }

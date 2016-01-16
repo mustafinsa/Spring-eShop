@@ -7,6 +7,7 @@
 <head>
     <title>eShop catalog</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+    <sec:csrfMetaTags/>
 </head>
 <body>
 <div class="header">
@@ -19,7 +20,7 @@
     <sec:authorize access="isAuthenticated()">
         <form class="login" action="logout" method="post">
             <input type="submit" value="Logout"/>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input id="csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
     </sec:authorize>
 </div>
@@ -39,10 +40,9 @@
                 <td class="label"><a href="product?id=${product.id}"><c:out value="${product.name}"/></a></td>
                 <td class="label"><c:out value="${product.price}"/></td>
                 <td class="label">
-                    <form name="Cart" action="itemcart" method="post">
-                        <input type="hidden" name="act" value="add"/>
+                    <form id="productAdded" method="post">
                         <input type="hidden" name="itemId" value="${product.id}"/>
-                        <input type="submit" value="Add to cart"/>
+                        <input id="submit" type="submit" value="Add to cart" content="${product.id}"/>
                     </form>
                 </td>
             </tr>
@@ -54,5 +54,32 @@
 <div class="footer">
     <p>© website.com 2015</p>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(
+        $(".products").on("click", "#submit", function(e) {
+            e.preventDefault();
+            var productId = $(this).attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            var token = $("meta[name='_csrf']").attr("content");
+            $.ajax({
+                "type": "POST",
+                "url": "<c:url value="/postCart"/>",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                "data": JSON.stringify({"target": productId}),
+                "success": function() {
+                    alert("success " + productId);
+                },
+                "error": function() {
+                    alert("error")
+                },
+                "contentType": "application/json",
+                "dataType": "json"
+            });
+        })
+    )
+</script>
 </body>
 </html>

@@ -13,6 +13,7 @@
         <intercept-url pattern="/error" access="permitAll" />
         <intercept-url pattern="/product" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll"/>
+        <intercept-url pattern="/postCart" access="permitAll"/>
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/logout" access="permitAll"/>
         <intercept-url pattern="/newAccount" access="permitAll"/>

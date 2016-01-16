@@ -5,11 +5,10 @@
 <html>
 <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html" charset="utf-8"/>
+    <title>Create account</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/resources/script/jquery-1.11.3.min.js"></script>
-    <title>Create account</title>
-
     <script type="text/javascript">
 
         function onLoad() {
