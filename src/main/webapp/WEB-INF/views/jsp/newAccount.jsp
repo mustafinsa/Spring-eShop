@@ -48,72 +48,80 @@
     </script>
 </head>
 <body>
-<div class="header">
-    <a class="title" href="${pageContext.request.contextPath}/">eShop catalog</a>
+<div class="wrapper">
 
-    <sec:authorize access="!isAuthenticated()">
-        <a class="login" href="login">Log in</a>
-    </sec:authorize>
+    <div class="header">
+        <a class="title" href="${pageContext.request.contextPath}/">eShop catalog</a>
 
-    <sec:authorize access="isAuthenticated()">
-        <form class="login" action="logout" method="post">
-            <input type="submit" value="Logout"/>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-    </sec:authorize>
-</div>
+        <div class="login">
+            <sec:authorize access="!isAuthenticated()">
+                <a href="login">Log in</a>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <form action="logout" method="post">
+                    <input type="submit" value="Logout"/>
+                    <input id="csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </sec:authorize>
+        </div>
+    </div>
 
-<div class="content">
-    <table class="formTable">
-        <sf:form id="details" action="${pageContext.request.contextPath}/createAccount" method="POST"
-                 commandName="user">
-            <tr>
-                <td class="label">Username</td>
-                <td>
-                    <sf:input path="username" class="control" type="text"/><br/>
+    <div class="content">
+        <table>
+            <sf:form id="details" action="${pageContext.request.contextPath}/createAccount" method="POST"
+                     commandName="user">
+                <tr>
+                    <td class="label">Username</td>
+                    <td>
+                        <sf:input path="username" class="control" type="text"/><br/>
 
-                    <div class="error"><sf:errors path="username"/></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="label">Name</td>
-                <td>
-                    <sf:input path="name" class="control" type="text"/><br/>
+                        <div class="error"><sf:errors path="username"/></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">Name</td>
+                    <td>
+                        <sf:input path="name" class="control" type="text"/><br/>
 
-                    <div class="error"><sf:errors path="name"/></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="label">Email</td>
-                <td>
-                    <sf:input path="email" class="control" type="text"/><br/>
+                        <div class="error"><sf:errors path="name"/></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">Email</td>
+                    <td>
+                        <sf:input path="email" class="control" type="text"/><br/>
 
-                    <div class="error"><sf:errors path="email"/></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="label">Password</td>
-                <td>
-                    <sf:input id="password" path="password" class="control" type="password"/><br/>
+                        <div class="error"><sf:errors path="email"/></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">Password</td>
+                    <td>
+                        <sf:input id="password" path="password" class="control" type="password"/><br/>
 
-                    <div class="error"><sf:errors path="password"/></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="label">Confirm password</td>
-                <td>
-                    <input id="confirmPassword" name="confirmPassword" class="control" type="password"/>
+                        <div class="error"><sf:errors path="password"/></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">Confirm password</td>
+                    <td>
+                        <input id="confirmPassword" name="confirmPassword" class="control" type="password"/>
 
-                    <div id="matchpass"></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="label"></td>
-                <td><input type="submit" class="control" value="Create account"/></td>
-            </tr>
+                        <div id="matchpass"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"></td>
+                    <td><input type="submit" class="control" value="Create account"/></td>
+                </tr>
 
-        </sf:form>
-    </table>
+            </sf:form>
+        </table>
+        <div class="footer">
+            <hr>
+            <p>© website.com 2015</p>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -33,6 +33,7 @@ public class ShoppingCartDaoTest {
 
     private User user1 = new User("Salavat2", "admin1@mail.ru", "12345678", true, "ROLE_USER", "user");
     private Product product1 = new Product("Product1", 1, 1);
+    private Product product2 = new Product("Product2", 2, 2);
 
     @Before
     public void setUp() throws Exception {
@@ -48,12 +49,19 @@ public class ShoppingCartDaoTest {
 
     @Test
     public void testSaveOrUpdate() throws Exception {
-        shoppingCartDao.saveOrUpdate(new ShoppingCart(product1.getId(), user1, 1, false));
+        productDao.saveOrUpdate(product2);
+        product2 = productDao.getProducts().get(0);
+        ShoppingCart shoppingCart1 = new ShoppingCart(product2.getId(), user1, 1, false);
+        shoppingCartDao.saveOrUpdate(shoppingCart1);
+        assertEquals(shoppingCart1, shoppingCartDao.getCart(user1.getUsername(), product2.getId()));
     }
 
     @Test
     public void testCurrentCartExist() throws Exception {
-        assertFalse(shoppingCartDao.currentCartExist("fakeUser"));
+        shoppingCartDao.saveOrUpdate(new ShoppingCart(product1.getId(), user1, 1, false));
+        assertFalse(shoppingCartDao.currentCartExist("fakeUser", 1));
+        assertFalse(shoppingCartDao.currentCartExist(user1.getUsername(), -1));
+        assertTrue(shoppingCartDao.currentCartExist(user1.getUsername(), product1.getId()));
     }
 
     @Test

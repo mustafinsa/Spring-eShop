@@ -1,31 +1,103 @@
+div.wrapper {
+    width: 960px;
+    margin: 10px auto;
+}
+
 div.header {
-    position: relative;
     text-align: center;
     width: 100%;
     height: 40px;
     background-color: #aab9b3;
 }
+
 div.content {
-    align-items: center;
-    position: inherit;
+    text-align: center;
     padding: 40px;
 }
+
 a.title {
-    color:white;
+    color: white;
     font-size: 35px;
 }
-.login {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+
+div.login {
+    float: right;
+    padding: 10px;
     color: white;
 }
-.products {
-    width: 400px;
-    padding: 10px;
-    border: 1px solid blue;
+
+table {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #aab9b3;
+    margin: 10px auto;
 }
-.label {
-    text-align: center;
-    vertical-align: top;
+
+th {
+    text-align: left;
+    border-bottom: 1px solid #aab9b3;
+}
+
+td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px dashed #aab9b3;
+}
+
+td.addToCart {
+    width: 50px;
+}
+
+input.login {
+    border-bottom: 1px dotted #dcdcdc;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    padding: 5px;
+    width: 270px;
+    margin-bottom: 20px;
+}
+
+input#remember-me {
+    width: 200px;
+}
+
+input:focus {
+    border: 1px dotted #dcdcdc;
+    outline: none;
+}
+
+input#submit {
+    color: #ffffff;
+    background-color: #665544;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+}
+
+input#submit:hover {
+    color: #665544;
+    background-color: #efefef;
+}
+
+fieldset {
+    width: 350px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px auto;
+    text-align: left;
+}
+
+legend {
+    background-color: #efefef;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.loginError {
+    color: red;
 }
