@@ -5,10 +5,12 @@ import com.mustafinsa.spring.eshop.model.ShoppingCartDao;
 import com.mustafinsa.spring.eshop.model.UsersDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +23,15 @@ public class ShoppingCartController {
     @Autowired
     private UsersDao usersDao;
 
-    @RequestMapping(value="postCart", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody Map<String, Object> getCartItem(Principal principal, @RequestBody Map<String, Object> data) {
+    @RequestMapping(value = "shoppingCart")
+    public String showShoppingCart(Principal principal, Model model) {
+        model.addAttribute("shoppingCart", shoppingCartDao.getCart(principal.getName()));
+        return "shoppingCart";
+    }
+
+    @RequestMapping(value = "postCart", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> getCartItem(Principal principal, @RequestBody Map<String, Object> data) {
 
         int itemId = Integer.parseInt((String) data.get("target"));
         if (shoppingCartDao.currentCartExist(principal.getName(), itemId)) {

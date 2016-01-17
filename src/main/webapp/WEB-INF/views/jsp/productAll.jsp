@@ -26,6 +26,11 @@
                 </form>
             </sec:authorize>
         </div>
+        
+        <div class="login">
+            <a href="${pageContext.request.contextPath}/shoppingCart">Shopping cart</a>
+        </div>
+
     </div>
 
     <div class="content">

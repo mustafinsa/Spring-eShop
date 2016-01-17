@@ -9,5 +9,7 @@ public interface ShoppingCartDao {
 
     ShoppingCart getCart(String username, int itemId);
 
+    List<ShoppingCart> getCart(String username);
+
     List<ShoppingCart> getCarts();
 }

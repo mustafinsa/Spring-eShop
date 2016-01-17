@@ -42,6 +42,15 @@ public class ShoppingCartDaoHibernate implements ShoppingCartDao {
     }
 
     @Override
+    public List<ShoppingCart> getCart(String username) {
+        Criteria criteria = session().createCriteria(ShoppingCart.class);
+        criteria.createAlias("user", "u");
+        criteria.add(Restrictions.eq("u.username", username));
+        criteria.add(Restrictions.eq("purchased", false));
+        return criteria.list();
+    }
+
+    @Override
     public List<ShoppingCart> getCarts() {
         return session().createCriteria(ShoppingCart.class).list();
     }

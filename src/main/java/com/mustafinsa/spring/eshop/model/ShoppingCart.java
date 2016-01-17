@@ -87,4 +87,15 @@ public class ShoppingCart {
         result = 31 * result + (purchased != null ? purchased.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", username=" + user.getUsername() +
+                ", itemId=" + itemId +
+                ", itemQuantity=" + itemQuantity +
+                ", purchased=" + purchased +
+                '}';
+    }
 }
