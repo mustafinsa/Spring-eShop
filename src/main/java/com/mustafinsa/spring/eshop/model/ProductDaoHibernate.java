@@ -23,8 +23,13 @@ public class ProductDaoHibernate implements ProductDao {
     }
 
     @Override
-    public void saveOrUpdate(Product product) {
-        session().saveOrUpdate(product);
+    public void save(Product product) {
+        session().save(product);
+    }
+
+    @Override
+    public void update(Product product) {
+        session().update(product);
     }
 
     @Override

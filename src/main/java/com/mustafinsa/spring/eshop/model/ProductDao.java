@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface ProductDao {
 
-    void saveOrUpdate(Product product);
+    void save(Product product);
+
+    void update(Product product);
 
     Product getProduct(int id);
 

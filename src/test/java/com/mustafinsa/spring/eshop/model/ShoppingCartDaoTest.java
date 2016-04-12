@@ -43,13 +43,13 @@ public class ShoppingCartDaoTest {
         jdbcTemplate.execute("DELETE FROM ShoppingCarts");
         jdbcTemplate.execute("DELETE FROM Users");
         usersDao.create(user1);
-        productDao.saveOrUpdate(product1);
+        productDao.save(product1);
         product1 = productDao.getProducts().get(0);
     }
 
     @Test
     public void testSaveOrUpdate() throws Exception {
-        productDao.saveOrUpdate(product2);
+        productDao.save(product2);
         product2 = productDao.getProducts().get(0);
         ShoppingCart shoppingCart1 = new ShoppingCart(product2.getId(), user1, 1, false);
         shoppingCartDao.saveOrUpdate(shoppingCart1);

@@ -16,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 @ActiveProfiles("dev")
 @ContextConfiguration(locations = {
         "classpath:spring-core-config.xml",
-        "classpath:spring-database-config.xml",
         "classpath:spring-datasource-config.xml",
         "classpath:spring-security-config.xml",})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,18 +38,18 @@ public class ProductDaoTest {
 
     @Test
     public void testSaveOrUpdateAndGet() throws Exception {
-        productDao.saveOrUpdate(product1);
+        productDao.save(product1);
         assertEquals(product1, productDao.getProducts().get(0));
 
         Product updatedProduct = productDao.getProducts().get(0);
         updatedProduct.setName("Updated product");
-        productDao.saveOrUpdate(updatedProduct);
+        productDao.update(updatedProduct);
         assertEquals(updatedProduct, productDao.getProduct(updatedProduct.getId()));
     }
 
     @Test
     public void testDelete() throws Exception {
-        productDao.saveOrUpdate(product2);
+        productDao.save(product2);
         for (Product product : productDao.getProducts()) {
             assertTrue(productDao.delete(product.getId()));
         }
