@@ -1,44 +1,40 @@
 package com.mustafinsa.spring.eshop.model;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Transactional
 @Repository
-public class UsersDaoHibernate implements UsersDao {
+@Transactional
+public class UsersDaoJpaImpl implements UsersDao {
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public Session session() {
-        return sessionFactory.getCurrentSession();
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Transactional
     public void create(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        session().save(user);
+        entityManager.persist(user);
     }
 
     @Override
     public User getUser(String username) {
-        Criteria crit = session().createCriteria(User.class);
-        crit.add(Restrictions.idEq(username));
-        return (User) crit.uniqueResult();
+        return entityManager.find(User.class, username);
     }
 
+    @Override
     public List<User> getAllUsers() {
-        return session().createQuery("FROM User").list();
+        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     public boolean exists(String username) {
